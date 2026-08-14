@@ -30,5 +30,34 @@
 
 /// exporting the directory 
 
-const info = require("./Fruits");   // requiring the dir
-console.log(info[0]);
+// const info = require("./Fruits");   // requiring the dir
+// console.log(info[0]);
+
+
+// const figlet = require("figlet");
+
+// figlet("Usharani", function (err, data) {
+//   if (err) {
+//     console.log("Something went wrong...");
+//     console.dir(err);
+//     return;
+//   }
+//   console.log(data);
+// });
+
+
+// now i will use the import for the access the math
+
+
+
+import {sum, mul} from "./math.js";
+import { generate, count } from "random-words";
+
+// console.log(sum(2,3));   // only this much is not enough we need to add the type=module in the packge.json file then only we can access 
+// console.log(generate());
+
+console.log(generate(5));
+
+
+// if u want we can again dowland the node module just write the 
+// npm install 

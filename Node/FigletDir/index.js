@@ -1,8 +1,3 @@
-// module.exports = {
-//     name: "banana",
-//     color: "yellow"
-// };
-
 const figlet = require("figlet");
 
 figlet("Usharani", function (err, data) {
