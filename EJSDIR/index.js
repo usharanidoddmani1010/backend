@@ -27,6 +27,40 @@ app.get("/rolldice", (req, res) => {
 });
 
 
+
+
+/////////////////////////
+// activity
+
+///  instagram ejs
+
+app.get("/ig/:username", (req, res) => {
+    // console.log(username); /// the put in the vscode terminal
+    // const followers = ["usha","rani","nishant","asha"];  // this is for the loops in ejs
+    // let { username } = req.params;
+
+    /////////////
+    // no need of writing the above now acces through the data.json
+
+    
+    const instData = require("./data.json");   
+    let {username} = req.params;
+    // console.log(instData);  // just printing give the error but in the vs terminql we can see the data
+    // res.render("instagram.ejs", { username, followers });
+    let data = instData[username];
+    console.log(data);
+    if(data) {
+        res.render("instagram.ejs", { data });  // only this 4 lines give u the obj in the browser and in the terminal it will give the if exists realted info other wise undifned
+    }else{
+        res.render("error.ejs");
+    }
+
+
+    // we are sending the whole data which come from the data.json but i only what the username data so for that i have wrrriten some code see 
+}); 
+
+
+
 app.listen(port, ()=> {
     console.log(`listening on port ${port}`);
 })
