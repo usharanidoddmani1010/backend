@@ -3,7 +3,8 @@ const app = express();
 const path = require("path");  // (1)  we need to write this for the this beclow set 
 
 const port = 8080;
-
+app.use(express.static(path.join(__dirname, "/public/css"))); // just public whout / also ok
+app.use(express.static(path.join(__dirname, "/public/js")));
 app.set("view engine", "ejs");   // the set, set many thng in that the view is also one and view is temple engine wich have the packages that are ejs
 app.set("views", path.join(__dirname, "/views")) // (2) after writing this only we don't get the error when we run this file from outside the ejsdiir 
 app.get("/", (req, res)=> {
