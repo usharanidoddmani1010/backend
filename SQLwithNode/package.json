@@ -1,0 +1,20 @@
+{
+  "name": "sqlwithnode",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "usharani",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^10.6.0",
+    "ejs": "^6.0.1",
+    "express": "^5.2.1",
+    "mysql2": "^3.24.2",
+    "nodemon": "^3.1.14",
+    "uuid": "^14.0.2"
+  }
+}
