@@ -6,7 +6,10 @@ const express = require("express");
 const app = express();
 const port = 8080;
 const path = require("path");
+const methodoverride = require("method-override");
 
+app.use(methodoverride("_method"));
+app.use(express.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
 
@@ -163,7 +166,38 @@ app.get("/user/:id/edit", (req, res) => {
       res.send("some error in DB");
   }
   // res.render("edit.ejs");
-})
+});
+
+// UPDATE (DB) route
+app.patch("/user/:id", (req, res) => {
+  // res.send("upated");
+  let { id } = req.params;
+  let { password : formPass, username: newUsername} = req.body;  // what i enter in the placholder that values which are used to check and update it
+  let q = `SELECT * FROM user WHERE id= '${id}'`;
+  try{
+      connection.query(q, (err, result) => {  
+        if(err) throw err;   
+        let user = result[0]; 
+        // res.render("edit.ejs", {user});
+
+        if(formPass != user.password) {
+          res.send("WRONG password");
+        }
+        // res.send(user);
+        else{
+          let q2 = `UPDATE user SET username='${newUsername}' WHERE id='${id}'`;
+          connection.query(q2, (rr, result) => {
+            if(err) throw err;  
+            // res.send(result);
+            res.redirect("/user");
+          });
+        }
+    });
+  } catch(err) {
+      console.log(err);
+      res.send("some error in DB");
+  }
+});
 
 app.listen(port, () => {
     console.log("Listening to port:  8080");
