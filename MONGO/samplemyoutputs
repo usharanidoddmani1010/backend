@@ -1,0 +1,1074 @@
+// Microsoft Windows [Version 10.0.26200.9168]
+// (c) Microsoft Corporation. All rights reserved.
+
+// C:\Users\HI>mongosh
+// Current Mongosh Log ID: 6a944136375e288b5ff7cf7e
+// Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.10.0
+// Using MongoDB:          8.3.8
+// Using Mongosh:          2.10.0
+
+// For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+// ------
+//    The server generated these startup warnings when booting
+//    2026-08-30T15:26:57.410+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+// ------
+
+// test> db.student.find();
+
+// test> db.student.insertMany({name:"usha",marks:100},{sname:"doddmani", stipend:1.5});
+// MongoInvalidArgumentError: Argument "docs" must be an array of documents
+// test> db.student.insertMany([{name:"usha",marks:100},{sname:"doddmani", stipend:1.5}]);
+// {
+//   acknowledged: true,
+//   insertedIds: {
+//     '0': ObjectId('6a944579375e288b5ff7cf7f'),
+//     '1': ObjectId('6a944579375e288b5ff7cf80')
+//   }
+// }
+// test> db.student.insertMany([{name:"usharani",marks:100},{sname:"nisha", stipend:1.5,marks:55}]);
+// {
+//   acknowledged: true,
+//   insertedIds: {
+//     '0': ObjectId('6a944687375e288b5ff7cf81'),
+//     '1': ObjectId('6a944687375e288b5ff7cf82')
+//   }
+// }
+// test> db.student.find(marks:{$gt:75});
+// Uncaught:
+// SyntaxError: Unexpected token, expected "," (1:21)
+
+// > 1 | db.student.find(marks:{$gt:75});
+//     |                      ^
+//   2 |
+
+// test>  db.student.find({marks:{$gt:75}});
+// [
+//   { _id: ObjectId('6a944579375e288b5ff7cf7f'), name: 'usha', marks: 100 },
+//   {
+//     _id: ObjectId('6a944687375e288b5ff7cf81'),
+//     name: 'usharani',
+//     marks: 100
+//   }
+// ]
+// test> db.student.find({marks:{$gte:50}});
+// [
+//   { _id: ObjectId('6a944579375e288b5ff7cf7f'), name: 'usha', marks: 100 },
+//   {
+//     _id: ObjectId('6a944687375e288b5ff7cf81'),
+//     name: 'usharani',
+//     marks: 100
+//   },
+//   {
+//     _id: ObjectId('6a944687375e288b5ff7cf82'),
+//     sname: 'nisha',
+//     stipend: 1.5,
+//     marks: 55
+//   }
+// ]
+// test> db.student.insertMany([{name:"usharani",marks:100},{sname:"nisha", stipend:1.5,marks:55test> db.student.insertMany([{name:"usharani",marks:100,city:"bengaluru"},{sname:"nisha", stipend:1.5,marks:55,city:"delhi"}]);
+// {
+//   acknowledged: true,
+//   insertedIds: {
+//     '0': ObjectId('6a944753375e288b5ff7cf83'),
+//     '1': ObjectId('6a944753375e288b5ff7cf84')
+//   }
+// }
+// test> db.student.find({city: {$in: ["bengaluru","kalaburgi"]}});
+// [
+//   {
+//     _id: ObjectId('6a944753375e288b5ff7cf83'),
+//     name: 'usharani',
+//     marks: 100,
+//     city: 'bengaluru'
+//   }
+// ]
+// test> db.student.find({$or: [ {marks: {$gt:55}},{city:"bengaluru"} ]});
+// [
+//   { _id: ObjectId('6a944579375e288b5ff7cf7f'), name: 'usha', marks: 100 },
+//   {
+//     _id: ObjectId('6a944687375e288b5ff7cf81'),
+//     name: 'usharani',
+//     marks: 100
+//   },
+//   {
+//     _id: ObjectId('6a944753375e288b5ff7cf83'),
+//     name: 'usharani',
+//     marks: 100,
+//     city: 'bengaluru'
+//   }
+// ]
+
+
+
+//////////////////////////////////////////
+// mongoos
+
+// test> show dbs
+// admin     40.00 KiB
+// college  144.00 KiB
+// config    72.00 KiB
+// local     72.00 KiB
+// test> use college
+// switched to db college
+// college> db.dropDatabase();
+// { ok: 1, dropped: 'college' }
+// college> show dbs
+// admin   40.00 KiB
+// config  72.00 KiB
+// local   72.00 KiB
+// college> use test
+// switched to db test
+// test> show dbs
+// admin   40.00 KiB
+// config  72.00 KiB
+// local   72.00 KiB
+// test> show collections
+// users
+// test> show collections
+// employees
+// users
+// test> show dbs
+// admin   40.00 KiB
+// config  96.00 KiB
+// local   72.00 KiB
+// test    16.00 KiB
+// test>
+
+
+/////////////
+// mongoose intert one 
+// test> db.users.find();
+
+// test>  db.users.find();
+// [
+//   {
+//     _id: ObjectId('6a95256e18e45dedc38c21b5'),
+//     name: 'usha',
+//     email: 'usharani@gmail.com',
+//     age: 19,
+//     __v: 0
+//   }
+// ]
+// test>  db.users.find();
+// [
+//   {
+//     _id: ObjectId('6a95256e18e45dedc38c21b5'),
+//     name: 'usha',
+//     email: 'usharani@gmail.com',
+//     age: 19,
+//     __v: 0
+//   },
+//   {
+//     _id: ObjectId('6a952657416867ee2f359916'),
+//     name: 'rani',
+//     email: 'rani@gmail.com',
+//     age: 19,
+//     __v: 0
+//   }
+// ]
+// test>
+
+/////////////// insert many
+
+// test>  db.users.find();
+// [
+//   {
+//     _id: ObjectId('6a95256e18e45dedc38c21b5'),
+//     name: 'usha',
+//     email: 'usharani@gmail.com',
+//     age: 19,
+//     __v: 0
+//   }
+// ]
+// test>  db.users.find();
+// [
+//   {
+//     _id: ObjectId('6a95256e18e45dedc38c21b5'),
+//     name: 'usha',
+//     email: 'usharani@gmail.com',
+//     age: 19,
+//     __v: 0
+//   },
+//   {
+//     _id: ObjectId('6a952657416867ee2f359916'),
+//     name: 'rani',
+//     email: 'rani@gmail.com',
+//     age: 19,
+//     __v: 0
+//   }
+// ]
+// test>  db.users.find();
+// [
+//   {
+//     _id: ObjectId('6a95256e18e45dedc38c21b5'),
+//     name: 'usha',
+//     email: 'usharani@gmail.com',
+//     age: 19,
+//     __v: 0
+//   },
+//   {
+//     _id: ObjectId('6a952657416867ee2f359916'),
+//     name: 'rani',
+//     email: 'rani@gmail.com',
+//     age: 19,
+//     __v: 0
+//   },
+//   {
+//     _id: ObjectId('6a9528872a1d0bdf2931e0ef'),
+//     name: 'Tony',
+//     age: 51,
+//     __v: 0
+//   },
+//   {
+//     _id: ObjectId('6a9528872a1d0bdf2931e0f0'),
+//     name: 'Peter',
+//     age: 51,
+//     __v: 0
+//   },
+//   {
+//     _id: ObjectId('6a9528872a1d0bdf2931e0f1'),
+//     name: 'Thor',
+//     age: 51,
+//     __v: 0
+//   },
+//   {
+//     _id: ObjectId('6a9528a3784729bbf86234f4'),
+//     name: 'Tony',
+//     age: 51,
+//     __v: 0
+//   },
+//   {
+//     _id: ObjectId('6a9528a3784729bbf86234f5'),
+//     name: 'Peter',
+//     age: 14,
+//     __v: 0
+//   },
+//   {
+//     _id: ObjectId('6a9528a3784729bbf86234f6'),
+//     name: 'Thor',
+//     age: 51,
+//     __v: 0
+//   },
+//   {
+//     _id: ObjectId('6a9528c6d4f868bcd3b34b90'),
+//     name: 'Tony',
+//     email: 'ton7@eamil.com',
+//     age: 51,
+//     __v: 0
+//   },
+//   {
+//     _id: ObjectId('6a9528c6d4f868bcd3b34b91'),
+//     name: 'Peter',
+//     email: 'peter7@eamil.com',
+//     age: 14,
+//     __v: 0
+//   },
+//   {
+//     _id: ObjectId('6a9528c6d4f868bcd3b34b92'),
+//     name: 'Thor',
+//     email: 'thor7@eamil.com',
+//     age: 51,
+//     __v: 0
+//   }
+// ]
+// test>
+
+
+// Microsoft Windows [Version 10.0.26200.9168]
+// (c) Microsoft Corporation. All rights reserved.
+
+// C:\Users\HI>mongosh
+// Current Mongosh Log ID: 6a95a57f3a881a2539ff78d8
+// Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.10.0
+// Using MongoDB:          8.3.8
+// Using Mongosh:          2.10.0
+
+// For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+// ------
+//    The server generated these startup warnings when booting
+//    2026-08-30T15:26:57.410+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+// ------
+
+// test> show dbs
+// admin   40.00 KiB
+// amazon   8.00 KiB
+// config  36.00 KiB
+// local   72.00 KiB
+// test    72.00 KiB
+// test> use amazon
+// switched to db amazon
+// amazon> show collection
+// MongoshInvalidInputError: [COMMON-10001] 'collection' is not a valid argument for "show".
+// amazon> show collections
+// books
+// amazon>  db.books.find();
+// [
+//   {
+//     _id: ObjectId('6a95a722b43bfe4613938940'),
+//     title: 'Math XII',
+//     author: 'RD Sharma',
+//     price: '1200',
+//     __v: 0
+//   }
+// ]
+// amazon> db.books.find();
+// [
+//   {
+//     _id: ObjectId('6a95a722b43bfe4613938940'),
+//     title: 'Math XII',
+//     author: 'RD Sharma',
+//     price: '1200',
+//     __v: 0
+//   },
+//   {
+//     _id: ObjectId('6a95a80f73b0a233cf3033be'),
+//     title: 'Math XII',
+//     author: 'RD Sharma',
+//     price: '1200',
+//     __v: 0
+//   },
+//   {
+//     _id: ObjectId('6a95a896449823fd16b6c8ce'),
+//     title: 'how to kill mockingmonkey',
+//     author: 'harma lee',
+//     price: 'abc',
+//     __v: 0
+//   },
+//   {
+//     _id: ObjectId('6a95b296ef2b7a9227b0d909'),
+//     title: 'how to kill mockingmonkey',
+//     author: 'harma lee',
+//     price: 299,
+//     discount: 0,
+//     __v: 0
+//   },
+//   {
+//     _id: ObjectId('6a9676eb925a7b90c84f220f'),
+//     title: 'the ego',
+//     author: 'virat kohli',
+//     price: 1,
+//     discount: 0,
+//     __v: 0
+//   },
+//   {
+//     _id: ObjectId('6a967c160cd112c3c427b06c'),
+//     title: 'the ego',
+//     author: 'virat kohli',
+//     price: 1,
+//     discount: 0,
+//     category: 'fiction',
+//     __v: 0
+//   }
+// ]
+// amazon> db.books.find()
+// [
+//   {
+//     _id: ObjectId('6a95a722b43bfe4613938940'),
+//     title: 'Math XII',
+//     author: 'RD Sharma',
+//     price: '1200',
+//     __v: 0
+//   },
+//   {
+//     _id: ObjectId('6a95a80f73b0a233cf3033be'),
+//     title: 'Math XII',
+//     author: 'RD Sharma',
+//     price: '1200',
+//     __v: 0
+//   },
+//   {
+//     _id: ObjectId('6a95a896449823fd16b6c8ce'),
+//     title: 'how to kill mockingmonkey',
+//     author: 'harma lee',
+//     price: 'abc',
+//     __v: 0
+//   },
+//   {
+//     _id: ObjectId('6a95b296ef2b7a9227b0d909'),
+//     title: 'how to kill mockingmonkey',
+//     author: 'harma lee',
+//     price: 299,
+//     discount: 0,
+//     __v: 0
+//   },
+//   {
+//     _id: ObjectId('6a9676eb925a7b90c84f220f'),
+//     title: 'the ego',
+//     author: 'virat kohli',
+//     price: 1,
+//     discount: 0,
+//     __v: 0
+//   },
+//   {
+//     _id: ObjectId('6a967c160cd112c3c427b06c'),
+//     title: 'the ego',
+//     author: 'virat kohli',
+//     price: 1,
+//     discount: 0,
+//     category: 'fiction',
+//     __v: 0
+//   },
+//   {
+//     _id: ObjectId('6a967ced4d9be497d8db8623'),
+//     title: 'The hero',
+//     author: 'goat vk',
+//     price: 181818,
+//     discount: 0,
+//     genre: [ 'comics', 'fictions', 'superheros' ],
+//     __v: 0
+//   }
+// ]
+// amazon> db.books.find();
+// [
+//   {
+//     _id: ObjectId('6a95a722b43bfe4613938940'),
+//     title: 'Math XII',
+//     author: 'RD Sharma',
+//     price: '1200',
+//     __v: 0
+//   },
+//   {
+//     _id: ObjectId('6a95a80f73b0a233cf3033be'),
+//     title: 'Math XII',
+//     author: 'RD Sharma',
+//     price: '1200',
+//     __v: 0
+//   },
+//   {
+//     _id: ObjectId('6a95a896449823fd16b6c8ce'),
+//     title: 'how to kill mockingmonkey',
+//     author: 'harma lee',
+//     price: -500,
+//     __v: 0
+//   },
+//   {
+//     _id: ObjectId('6a95b296ef2b7a9227b0d909'),
+//     title: 'how to kill mockingmonkey',
+//     author: 'harma lee',
+//     price: 299,
+//     discount: 0,
+//     __v: 0
+//   },
+//   {
+//     _id: ObjectId('6a9676eb925a7b90c84f220f'),
+//     title: 'the ego',
+//     author: 'virat kohli',
+//     price: 1,
+//     discount: 0,
+//     __v: 0
+//   },
+//   {
+//     _id: ObjectId('6a967c160cd112c3c427b06c'),
+//     title: 'the ego',
+//     author: 'virat kohli',
+//     price: 1,
+//     discount: 0,
+//     category: 'fiction',
+//     __v: 0
+//   },
+//   {
+//     _id: ObjectId('6a967ced4d9be497d8db8623'),
+//     title: 'The hero',
+//     author: 'goat vk',
+//     price: 181818,
+//     discount: 0,
+//     genre: [ 'comics', 'fictions', 'superheros' ],
+//     __v: 0
+//   }
+// ]
+// amazon> db.books.find
+// [Function: find] AsyncFunction {
+//   returnsPromise: true,
+//   apiVersions: [ 1, Infinity ],
+//   returnType: 'Cursor',
+//   serverVersions: [ '0.0.0', '999.999.999' ],
+//   topologies: [ 'ReplSet', 'Standalone', 'Sharded', 'LoadBalanced' ],
+//   deprecated: false,
+//   platforms: [ 'Compass', 'Browser', 'CLI' ],
+//   isDirectShellCommand: false,
+//   acceptsRawInput: false,
+//   shellCommandCompleter: undefined,
+//   newShellCommandCompleter: undefined,
+//   help: [Function (anonymous)] Help
+// }
+// amazon> db.books.find()
+// [
+//   {
+//     _id: ObjectId('6a95a722b43bfe4613938940'),
+//     title: 'Math XII',
+//     author: 'RD Sharma',
+//     price: '1200',
+//     __v: 0
+//   },
+//   {
+//     _id: ObjectId('6a95a80f73b0a233cf3033be'),
+//     title: 'Math XII',
+//     author: 'RD Sharma',
+//     price: '1200',
+//     __v: 0
+//   },
+//   {
+//     _id: ObjectId('6a95a896449823fd16b6c8ce'),
+//     title: 'how to kill mockingmonkey',
+//     author: 'harma lee',
+//     price: 500,
+//     __v: 0
+//   },
+//   {
+//     _id: ObjectId('6a95b296ef2b7a9227b0d909'),
+//     title: 'how to kill mockingmonkey',
+//     author: 'harma lee',
+//     price: 299,
+//     discount: 0,
+//     __v: 0
+//   },
+//   {
+//     _id: ObjectId('6a9676eb925a7b90c84f220f'),
+//     title: 'the ego',
+//     author: 'virat kohli',
+//     price: 1,
+//     discount: 0,
+//     __v: 0
+//   },
+//   {
+//     _id: ObjectId('6a967c160cd112c3c427b06c'),
+//     title: 'the ego',
+//     author: 'virat kohli',
+//     price: 1,
+//     discount: 0,
+//     category: 'fiction',
+//     __v: 0
+//   },
+//   {
+//     _id: ObjectId('6a967ced4d9be497d8db8623'),
+//     title: 'The hero',
+//     author: 'goat vk',
+//     price: 181818,
+//     discount: 0,
+//     genre: [ 'comics', 'fictions', 'superheros' ],
+//     __v: 0
+//   }
+// ]
+
+
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend> cd MONGO
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\MONGO> node book.js
+// connection successfull
+
+//  *  History restored 
+
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend> cd mongo
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> node index.js
+// connection successfull
+// null
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> node book.js
+// connection successfull
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> node book.js
+// connection successfull
+// {
+//   title: 'Math XII',
+//   author: 'RD Sharma',
+//   price: '1200',
+//   _id: new ObjectId('6a95a722b43bfe4613938940'),
+//   __v: 0
+// }
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> node books.js
+// node:internal/modules/cjs/loader:1479
+//   throw err;
+//   ^
+
+// Error: Cannot find module 'C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\books.js'
+//     at Module._resolveFilename (node:internal/modules/cjs/loader:1476:15)
+//     at wrapResolveFilename (node:internal/modules/cjs/loader:1049:27)
+//     at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1073:10)
+//     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1094:12)
+//     at Module._load (node:internal/modules/cjs/loader:1262:25)
+//     at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+//     at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+//     at node:internal/main/run_main_module:33:47 {
+//   code: 'MODULE_NOT_FOUND',
+//   requireStack: []
+// }
+
+// Node.js v24.15.0
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> node book.js
+// C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\book.js:45
+// let book1 = new Book({
+//     ^
+
+// SyntaxError: Identifier 'book1' has already been declared
+//     at wrapSafe (node:internal/modules/cjs/loader:1763:18)
+//     at Module._compile (node:internal/modules/cjs/loader:1804:20)
+//     at Object..js (node:internal/modules/cjs/loader:1961:10)
+//     at Module.load (node:internal/modules/cjs/loader:1553:32)
+//     at Module._load (node:internal/modules/cjs/loader:1355:12)
+//     at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+//     at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+//     at node:internal/main/run_main_module:33:47
+
+// Node.js v24.15.0
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> ^C
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> node book.js
+// connection successfull
+// {
+//   title: 'Math XII',
+//   author: 'RD Sharma',
+//   price: '1200',
+//   _id: new ObjectId('6a95a80f73b0a233cf3033be'),
+//   __v: 0
+// }
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> node book.js
+// C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\book.js:51
+// book1.save().then((res) => {
+// ^
+
+// ReferenceError: book1 is not defined
+//     at Object.<anonymous> (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\book.js:51:1)
+//     at Module._compile (node:internal/modules/cjs/loader:1830:14)
+//     at Object..js (node:internal/modules/cjs/loader:1961:10)
+//     at Module.load (node:internal/modules/cjs/loader:1553:32)
+//     at Module._load (node:internal/modules/cjs/loader:1355:12)
+//     at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+//     at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+//     at node:internal/main/run_main_module:33:47
+
+// Node.js v24.15.0
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> node book.js
+// connection successfull
+// {
+//   title: 'how to kill mockingmonkey',
+//   author: 'harma lee',
+//   price: 'abc',
+//   _id: new ObjectId('6a95a896449823fd16b6c8ce'),
+//   __v: 0
+// }
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> node book.js
+// C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\book.js:54
+//     console.log(err);
+//                 ^
+
+// ReferenceError: err is not defined
+//     at C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\book.js:54:17
+//     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+
+// Node.js v24.15.0
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> ^C
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> node book.js
+// ValidationError: Book validation failed: price: Cast to Number failed for value "abc" (type string) at path "price"
+//     at Document.invalidate (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\document.js:3572:32)
+//     at model.$set (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\document.js:1549:12)
+//     at model.$set (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\document.js:1198:16)
+//     at model.Document (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\document.js:182:12)
+//     at model.Model (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\model.js:143:12)
+//     at new model (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\model.js:5012:15)
+//     at Object.<anonymous> (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\book.js:45:13)
+//     at Module._compile (node:internal/modules/cjs/loader:1830:14)
+//     at Object..js (node:internal/modules/cjs/loader:1961:10)
+//     at Module.load (node:internal/modules/cjs/loader:1553:32) {
+//   errors: {
+//     price: CastError: Cast to Number failed for value "abc" (type string) at path "price"
+//         at SchemaNumber.cast (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\schema\number.js:412:11)
+//         at SchemaType.applySetters (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\schemaType.js:1399:12)
+//         at model.$set (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\document.js:1509:22)
+//         at model.$set (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\document.js:1198:16)
+//         at model.Document (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\document.js:182:12)
+//         at model.Model (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\model.js:143:12)
+//         at new model (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\model.js:5012:15)
+//         at Object.<anonymous> (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\book.js:45:13)
+//         at Module._compile (node:internal/modules/cjs/loader:1830:14)
+//         at Object..js (node:internal/modules/cjs/loader:1961:10) {
+//       stringValue: '"abc"',
+//       messageFormat: undefined,
+//       kind: 'Number',
+//       value: 'abc',
+//       path: 'price',
+//       reason: Error: Cast to Number failed: value is not a valid number
+//           at castNumber (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\cast\number.js:26:11)
+//           at SchemaNumber.cast (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\schema\number.js:410:12)
+//           at SchemaType.applySetters (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\schemaType.js:1399:12)
+//           at model.$set (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\document.js:1509:22)
+//           at model.$set (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\document.js:1198:16)
+//           at model.Document (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\document.js:182:12)
+//           at model.Model (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\model.js:143:12)
+//           at new model (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\model.js:5012:15)
+//           at Object.<anonymous> (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\book.js:45:13)
+//           at Module._compile (node:internal/modules/cjs/loader:1830:14),
+//       valueType: 'string'
+//     }
+//   },
+//   _message: 'Book validation failed'
+// }
+// connection successfull
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> node book.js
+// connection successfull
+// {
+//   title: 'how to kill mockingmonkey',
+//   author: 'harma lee',
+//   price: 299,
+//   discount: 0,
+//   _id: new ObjectId('6a95b296ef2b7a9227b0d909'),
+//   __v: 0
+// }
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> node book.js
+// ValidationError: Book validation failed: title: Path `title` (`how to kill mockingmonkey of t...`, length 67) is longer than the maximum allowed length (20).
+//     at model.validate (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\document.js:2944:36)
+//     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+//     at async model.$__save (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\model.js:399:7)
+//     at async maybeTracedSave (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\model.js:676:7) {
+//   errors: {
+//     title: ValidatorError: Path `title` (`how to kill mockingmonkey of t...`, length 67) is longer than the maximum allowed length (20).
+//         at SchemaString.doValidate (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\schemaType.js:1541:13)
+//         at model.validate (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\document.js:2922:20)
+//         at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+//         at async model.$__save (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\model.js:399:7)
+//         at async maybeTracedSave (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\model.js:676:7) {
+//       properties: [Object],
+//       kind: 'maxlength',
+//       path: 'title',
+//       value: 'how to kill mockingmonkey of the history of the world and the human',
+//       reason: undefined,
+//       Symbol(mongoose#validatorError): true
+//     }
+//   },
+//   _message: 'Book validation failed'
+// }
+// connection successfull
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> ^C
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> node book.js
+// C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\book.js:59
+// book2.save().then((res) => {
+// ^
+
+// ReferenceError: book2 is not defined
+//     at Object.<anonymous> (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\book.js:59:1)
+//     at Module._compile (node:internal/modules/cjs/loader:1830:14)
+//     at Object..js (node:internal/modules/cjs/loader:1961:10)
+//     at Module.load (node:internal/modules/cjs/loader:1553:32)
+//     at Module._load (node:internal/modules/cjs/loader:1355:12)
+//     at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+//     at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+//     at node:internal/main/run_main_module:33:47
+
+// Node.js v24.15.0
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> ^C
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> node book.js
+// ValidationError: Book validation failed: price: Path `price` (-1) is less than minimum allowed value (1).
+//     at model.validate (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\document.js:2944:36)
+//     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+//     at async model.$__save (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\model.js:399:7)
+//     at async maybeTracedSave (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\model.js:676:7) {
+//   errors: {
+//     price: ValidatorError: Path `price` (-1) is less than minimum allowed value (1).
+//         at SchemaNumber.doValidate (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\schemaType.js:1541:13)
+//         at model.validate (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\document.js:2922:20)
+//         at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+//         at async model.$__save (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\model.js:399:7)
+//         at async maybeTracedSave (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\model.js:676:7) {
+//       properties: [Object],
+//       kind: 'min',
+//       path: 'price',
+//       value: -1,
+//       reason: undefined,
+//       Symbol(mongoose#validatorError): true
+//     }
+//   },
+//   _message: 'Book validation failed'
+// }
+// connection successfull
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> node book.js
+// connection successfull
+// {
+//   title: 'the ego',
+//   author: 'virat kohli',
+//   price: 1,
+//   discount: 0,
+//   _id: new ObjectId('6a9676eb925a7b90c84f220f'),
+//   __v: 0
+// }
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> node book.js
+// C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\book.js:43
+//         type: string,
+//               ^
+
+// ReferenceError: string is not defined
+//     at Object.<anonymous> (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\book.js:43:15)
+//     at Module._compile (node:internal/modules/cjs/loader:1830:14)
+//     at Object..js (node:internal/modules/cjs/loader:1961:10)
+//     at Module.load (node:internal/modules/cjs/loader:1553:32)
+//     at Module._load (node:internal/modules/cjs/loader:1355:12)
+//     at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+//     at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+//     at node:internal/main/run_main_module:33:47
+
+// Node.js v24.15.0
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> ^C
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> node book.js
+// ValidationError: Book validation failed: category: `comic` is not a valid enum value for path `category`.
+//     at model.validate (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\document.js:2944:36)
+//     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+//     at async model.$__save (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\model.js:399:7)
+//     at async maybeTracedSave (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\model.js:676:7) {
+//   errors: {
+//     category: ValidatorError: `comic` is not a valid enum value for path `category`.
+//         at SchemaString.doValidate (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\schemaType.js:1541:13)
+//         at model.validate (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\document.js:2922:20)
+//         at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+//         at async model.$__save (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\model.js:399:7)
+//         at async maybeTracedSave (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\model.js:676:7) {
+//       properties: [Object],
+//       kind: 'enum',
+//       path: 'category',
+//       value: 'comic',
+//       reason: undefined,
+//       Symbol(mongoose#validatorError): true
+//     }
+//   },
+//   _message: 'Book validation failed'
+// }
+// connection successfull
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> node book.js
+// connection successfull
+// {
+//   title: 'the ego',
+//   author: 'virat kohli',
+//   price: 1,
+//   discount: 0,
+//   category: 'fiction',
+//   _id: new ObjectId('6a967c160cd112c3c427b06c'),
+//   __v: 0
+// }
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> node book.js
+// connection successfull
+// {
+//   title: 'The hero',
+//   author: 'goat vk',
+//   price: 181818,
+//   discount: 0,
+//   genre: [ 'comics', 'fictions', 'superheros' ],
+//   _id: new ObjectId('6a967ced4d9be497d8db8623'),
+//   __v: 0
+// }
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> node book.js
+// C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\book.js:75
+// book1.save().then((res) => {
+// ^
+
+// ReferenceError: book1 is not defined
+//     at Object.<anonymous> (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\book.js:75:1)
+//     at Module._compile (node:internal/modules/cjs/loader:1830:14)
+//     at Object..js (node:internal/modules/cjs/loader:1961:10)
+//     at Module.load (node:internal/modules/cjs/loader:1553:32)
+//     at Module._load (node:internal/modules/cjs/loader:1355:12)
+//     at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+//     at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+//     at node:internal/main/run_main_module:33:47
+
+// Node.js v24.15.0
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> ^C
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> node book.js
+// C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\book.js:75
+// Book.save().then((res) => {
+//      ^
+
+// TypeError: Book.save is not a function
+//     at Object.<anonymous> (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\book.js:75:6)
+//     at Module._compile (node:internal/modules/cjs/loader:1830:14)
+//     at Object..js (node:internal/modules/cjs/loader:1961:10)
+//     at Module.load (node:internal/modules/cjs/loader:1553:32)
+//     at Module._load (node:internal/modules/cjs/loader:1355:12)
+//     at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+//     at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+//     at node:internal/main/run_main_module:33:47
+
+// Node.js v24.15.0
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> ^C
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> node book.js
+// connection successfull
+// {
+//   discount: 0,
+//   genre: [],
+//   _id: new ObjectId('6a95a896449823fd16b6c8ce'),
+//   title: 'how to kill mockingmonkey',
+//   author: 'harma lee',
+//   __v: 0
+// }
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> node book.js
+// ValidationError: Validation failed: price: Path `price` (-500) is less than minimum allowed value (1).
+//     at model.Query.validate (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\query.js:4192:19)
+//     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+//     at async model.Query._findOneAndUpdate (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\query.js:3624:5)
+//     at async maybeTracedQueryExec (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\query.js:4797:65) {
+//   errors: {
+//     price: ValidatorError: Path `price` (-500) is less than minimum allowed value (1).
+//         at SchemaNumber.doValidate (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\schemaType.js:1541:13)
+//         at updateValidators (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\helpers\updateValidators.js:137:22)
+//         at model.Query.validate (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\query.js:4190:36)
+//         at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+//         at async model.Query._findOneAndUpdate (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\query.js:3624:5)
+//         at async maybeTracedQueryExec (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\query.js:4797:65) {
+//       properties: [Object],
+//       kind: 'min',
+//       path: 'price',
+//       value: -500,
+//       reason: undefined,
+//       Symbol(mongoose#validatorError): true
+//     }
+//   },
+//   _message: 'Validation failed'
+// }
+// connection successfull
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> node book.js
+// connection successfull
+// {
+//   discount: 0,
+//   genre: [],
+//   _id: new ObjectId('6a95a896449823fd16b6c8ce'),
+//   title: 'how to kill mockingmonkey',
+//   author: 'harma lee',
+//   price: -500,
+//   __v: 0
+// }
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> node book.js
+// ValidationError: Validation failed: price: Price is too low for Amazon selling
+//     at model.Query.validate (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\query.js:4192:19)
+//     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+//     at async model.Query._findOneAndUpdate (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\query.js:3624:5)
+//     at async maybeTracedQueryExec (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\query.js:4797:65) {
+//   errors: {
+//     price: ValidatorError: Price is too low for Amazon selling
+//         at SchemaNumber.doValidate (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\schemaType.js:1541:13)
+//         at updateValidators (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\helpers\updateValidators.js:137:22)
+//         at model.Query.validate (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\query.js:4190:36)
+//         at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+//         at async model.Query._findOneAndUpdate (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\query.js:3624:5)
+//         at async maybeTracedQueryExec (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\query.js:4797:65) {
+//       properties: [Object],
+//       kind: 'min',
+//       path: 'price',
+//       value: -500,
+//       reason: undefined,
+//       Symbol(mongoose#validatorError): true
+//     }
+//   },
+//   _message: 'Validation failed'
+// }
+// connection successfull
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> node book.js
+// {
+//   price: ValidatorError: Price is too low for Amazon selling
+//       at SchemaNumber.doValidate (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\schemaType.js:1541:13)
+//       at updateValidators (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\helpers\updateValidators.js:137:22)
+//       at model.Query.validate (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\query.js:4190:36)
+//       at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+//       at async model.Query._findOneAndUpdate (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\query.js:3624:5)
+//       at async maybeTracedQueryExec (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\query.js:4797:65) {
+//     properties: {
+//       validator: [Function (anonymous)],
+//       message: 'Price is too low for Amazon selling',
+//       type: 'min',
+//       min: 1,
+//       path: 'price',
+//       fullPath: 'price',
+//       value: -500
+//     },
+//     kind: 'min',
+//     path: 'price',
+//     value: -500,
+//     reason: undefined,
+//     Symbol(mongoose#validatorError): true
+//   }
+// }
+// connection successfull
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> node books.js
+// node:internal/modules/cjs/loader:1479
+//   throw err;
+//   ^
+
+// Error: Cannot find module 'C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\books.js'
+//     at Module._resolveFilename (node:internal/modules/cjs/loader:1476:15)
+//     at wrapResolveFilename (node:internal/modules/cjs/loader:1049:27)
+//     at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1073:10)
+//     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1094:12)
+//     at Module._load (node:internal/modules/cjs/loader:1262:25)
+//     at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+//     at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+//     at node:internal/main/run_main_module:33:47 {
+//   code: 'MODULE_NOT_FOUND',
+//   requireStack: []
+// }
+
+// Node.js v24.15.0
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> node book.js
+// C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\book.js:75
+//      console.log(err.error.price);
+//                            ^
+
+// TypeError: Cannot read properties of undefined (reading 'price')
+//     at C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\book.js:75:28
+//     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+
+// Node.js v24.15.0
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> node book.js
+// ValidatorError: Price is too low for Amazon selling
+//     at SchemaNumber.doValidate (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\schemaType.js:1541:13)
+//     at updateValidators (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\helpers\updateValidators.js:137:22)
+//     at model.Query.validate (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\query.js:4190:36)
+//     at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+//     at async model.Query._findOneAndUpdate (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\query.js:3624:5)
+//     at async maybeTracedQueryExec (C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\node_modules\mongoose\lib\query.js:4797:65) {
+//   properties: {
+//     validator: [Function (anonymous)],
+//     message: 'Price is too low for Amazon selling',
+//     type: 'min',
+//     min: 1,
+//     path: 'price',
+//     fullPath: 'price',
+//     value: -500
+//   },
+//   kind: 'min',
+//   path: 'price',
+//   value: -500,
+//   reason: undefined,
+//   Symbol(mongoose#validatorError): true
+// }
+// connection successfull
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> node book.js
+// undefined
+// connection successfull
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> node book.js
+// {
+//   validator: [Function (anonymous)],
+//   message: 'Price is too low for Amazon selling',
+//   type: 'min',
+//   min: 1,
+//   path: 'price',
+//   fullPath: 'price',
+//   value: -500
+// }
+// connection successfull
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> node book,js
+// node:internal/modules/cjs/loader:1479
+//   throw err;
+//   ^
+
+// Error: Cannot find module 'C:\Users\HI\OneDrive\Documents\allAp\backend\mongo\book,js'
+//     at Module._resolveFilename (node:internal/modules/cjs/loader:1476:15)
+//     at wrapResolveFilename (node:internal/modules/cjs/loader:1049:27)
+//     at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1073:10)
+//     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1094:12)
+//     at Module._load (node:internal/modules/cjs/loader:1262:25)
+//     at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+//     at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+//     at node:internal/main/run_main_module:33:47 {
+//   code: 'MODULE_NOT_FOUND',
+//   requireStack: []
+// }
+
+// Node.js v24.15.0
+// PS C:\Users\HI\OneDrive\Documents\allAp\backend\mongo> node book.js
+// Price is too low for Amazon selling
+// connection successfull
+
+
