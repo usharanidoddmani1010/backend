@@ -9,8 +9,10 @@
 <body>
     <h3>All Chats!</h3>
     <form method="GET" action="/chats/new">
-        <button>New Chat</button>
+        <button>Send a Message</button>
     </form>
+    <br>
+    <br>
     <% for( let chat of chats){ %>
         <div class="chat">
             <p>From: <i> <%= chat.from %> </i></p>
@@ -21,9 +23,11 @@
                 <form method="GET" action="/chats/<%= chat._id  %>/edit">
                     <button>Edit</button>
                 </form>
-                <br>
                 <form method="POST" action="/chats/<%= chat._id  %>?_method=DELETE">
                     <button>Delete</button>
+                </form>
+                <form method="GET" action="/chats/<%= chat._id  %>">
+                    <button>Show</button>
                 </form>
             </div>
             <p>Received by: <i> <%= chat.to %> </i></p>
@@ -33,6 +37,7 @@
         
             
         </div>
+        <br>
         <br>
         <br>
     <% } %>
